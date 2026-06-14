@@ -1,86 +1,163 @@
 # Playwright Web Framework
 
-A Python-based test automation framework built with Playwright and pytest, demonstrating scalable UI and API testing practices using Page Object Model architecture.
-
----
+A Python-based test automation framework built with Playwright and pytest, demonstrating scalable UI and API testing practices using the Page Object Model (POM) architecture.
 
 ## Tech Stack
 
-- **Python 3.11**
-- **Playwright** — browser automation
-- **pytest** — test runner
-- **Page Object Model** — test structure pattern
-- **GitHub Actions** — CI/CD integration
+* Python 3.13
+* Playwright — Browser automation
+* pytest — Test runner and fixtures
+* Page Object Model (POM) — Test architecture
+* Requests/API Client — API testing
+* GitHub Actions — CI/CD integration
 
 ---
 
 ## Project Structure
 
-```
+```text
 playwright_web_framework/
-├── pages/                  # Page Object classes
-│   ├── base_page.py        # Shared page methods
-│   └── login_page.py       # Login page interactions
-├── tests/                  # Test suites
-│   ├── conftest.py         # Fixtures and setup
-│   └── test_login.py       # Login flow tests
-├── utils/                  # Helper utilities
-├── .github/workflows/      # GitHub Actions CI pipeline
-├── requirements.txt
-├── pytest.ini
-└── run.py
+│
+├── pages/                     # Page Object Models
+│   ├── __init__.py
+│   ├── base_page.py           # Shared page functionality
+│   └── login_page.py          # Login page interactions
+│
+├── tests/                     # Test suites
+│   ├── __init__.py
+│   ├── conftest.py            # Pytest fixtures
+│   ├── test_login.py          # UI login tests
+│   └── api_login_test.py      # API login tests
+│
+├── utils/                     # Helper utilities
+│   ├── __init__.py
+│   ├── api_client.py          # API request wrapper
+│   └── helpers.py
+│
+├── .github/
+│   └── workflows/             # GitHub Actions CI pipeline
+│
+├── .gitignore
+├── pytest.ini                 # Pytest configuration
+├── requirements.txt           # Project dependencies
+├── run.py                     # Test runner
+├── mcp.server.py
+└── README.md
 ```
 
 ---
 
-## What This Covers
+## Features
 
-- UI test automation using Playwright with Python
-- Page Object Model for maintainable, reusable test components
-- Fixture-based setup and teardown via pytest `conftest.py`
-- Automated test execution on every push via GitHub Actions
-- Designed to extend with API test coverage (in progress)
+### UI Testing
+
+* Playwright browser automation
+* Page Object Model (POM) design pattern
+* Reusable page components
+* Pytest fixtures for setup and teardown
+* Cross-browser execution support
+
+### API Testing
+
+* API client abstraction layer
+* Response validation
+* Authentication and login endpoint testing
+* Reusable API fixtures
+
+### CI/CD
+
+* Automated test execution through GitHub Actions
+* Runs on every push and pull request
+* Easy integration into development workflows
+
+---
+
+## Sample Test Coverage
+
+### UI
+
+* Successful login validation
+* Invalid credentials validation
+* Empty login form validation
+
+### API
+
+* Login endpoint validation
+* Response status code verification
+* Response payload validation
 
 ---
 
 ## Running Locally
 
-**Install dependencies**
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
 playwright install chromium
 ```
 
-**Run all tests**
+### Run all tests
 
 ```bash
 pytest tests/ -v
 ```
 
-**Run a specific test file**
+### Run UI tests
 
 ```bash
 pytest tests/test_login.py -v
+```
+
+### Run API tests
+
+```bash
+pytest tests/api_login_test.py -v
+```
+
+### Run tests in headed mode
+
+```bash
+pytest tests/ --headed
 ```
 
 ---
 
 ## CI Pipeline
 
-Tests run automatically on every push and pull request to `main` via GitHub Actions. Results are available under the Actions tab in the repository.
+Tests run automatically on every push and pull request through GitHub Actions.
+
+Test results and workflow logs are available under the **Actions** tab of the repository.
 
 ---
 
-## Roadmap
+## Future Enhancements
 
-- [ ] Add API test layer using `requests` or Playwright `request` context
-- [ ] Expand UI coverage beyond login flows
-- [ ] Add HTML test reporting
-- [ ] Add test data management via fixtures
+* Add HTML reporting (pytest-html)
+* Add Allure reporting
+* Expand API test coverage
+* Add test data management fixtures
+* Add parallel execution support
+* Add environment-based configuration
 
 ---
 
 ## Author
 
-Iryna Shelevii — [LinkedIn](https://linkedin.com/in/irynasheleviiqa) | [GitHub](https://github.com/drajvmixx)
+**Iryna Shelevii**
+
+* GitHub: https://github.com/drajvmixx
+* LinkedIn: [www.linkedin.com/in/iryna-shelevii](http://www.linkedin.com/in/iryna-shelevii)
+
+---
+
+## Notes
+
+The following directories are generated automatically and excluded from source control:
+
+```text
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+```
