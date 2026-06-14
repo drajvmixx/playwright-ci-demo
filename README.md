@@ -147,7 +147,7 @@ Test results and workflow logs are available under the **Actions** tab of the re
 **Iryna Shelevii**
 
 * GitHub: https://github.com/drajvmixx
-* LinkedIn: [www.linkedin.com/in/iryna-shelevii](http://www.linkedin.com/in/iryna-shelevii)
+* LinkedIn: https://www.linkedin.com/in/irynasheleviiqa/
 
 ---
 
