@@ -5,10 +5,9 @@ from utils.api_client import APIClient
 
 @pytest.fixture(scope="session")
 def api_client():
-    return APIClient(base_url="https://your-api-base-url.com")
+    return APIClient(base_url="https://www.saucedemo.com")
 
 @pytest.fixture
 def login_page(page: Page) -> LoginPage:
-    login = LoginPage(page)
-    page.goto("/login")
-    return login
+    page.goto("https://www.saucedemo.com")
+    return LoginPage(page)
