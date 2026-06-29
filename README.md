@@ -1,163 +1,123 @@
 # Playwright Web Framework
 
-A Python-based test automation framework built with Playwright and pytest, demonstrating scalable UI and API testing practices using the Page Object Model (POM) architecture.
+A production-grade Python test automation framework built with Playwright and pytest, featuring an integrated **MCP (Model Context Protocol) server** that connects Claude AI directly to the test suite — enabling AI-assisted test analysis, failure triage, and test case authoring as part of the automation workflow.
+
+Built to demonstrate scalable, maintainable quality engineering practices across UI and API layers, with CI/CD integration via GitHub Actions.
+
+---
+
+## AI Integration — MCP Server
+
+The framework includes a custom MCP server (`mcp.server.py`) that exposes test suite context to Claude AI. This enables:
+
+- **Natural-language failure analysis** — ask Claude to interpret test results and identify root causes
+- **AI-assisted test authoring** — generate and refine test cases through conversational prompts
+- **Live test context awareness** — Claude can read framework structure, fixtures, and test output directly
+- **Accelerated maintenance** — use AI assistance to update selectors, refactor page objects, and extend coverage
+
+This integration reflects real-world application of AI-augmented testing workflows, aligned with emerging industry practices in intelligent test automation.
+
+---
 
 ## Tech Stack
 
-* Python 3.13
-* Playwright — Browser automation
-* pytest — Test runner and fixtures
-* Page Object Model (POM) — Test architecture
-* Requests/API Client — API testing
-* GitHub Actions — CI/CD integration
+| Layer | Technology |
+|---|---|
+| Language | Python 3.11 |
+| Browser Automation | Playwright |
+| Test Runner | pytest |
+| AI Integration | MCP Server + Claude AI |
+| Architecture | Page Object Model |
+| API Testing | Playwright request context |
+| CI/CD | GitHub Actions |
 
 ---
 
 ## Project Structure
 
-```text
+```
 playwright_web_framework/
-│
-├── pages/                     # Page Object Models
-│   ├── __init__.py
-│   ├── base_page.py           # Shared page functionality
-│   └── login_page.py          # Login page interactions
-│
-├── tests/                     # Test suites
-│   ├── __init__.py
-│   ├── conftest.py            # Pytest fixtures
-│   ├── test_login.py          # UI login tests
-│   └── api_login_test.py      # API login tests
-│
-├── utils/                     # Helper utilities
-│   ├── __init__.py
-│   ├── api_client.py          # API request wrapper
-│   └── helpers.py
-│
-├── .github/
-│   └── workflows/             # GitHub Actions CI pipeline
-│
-├── .gitignore
-├── pytest.ini                 # Pytest configuration
-├── requirements.txt           # Project dependencies
-├── run.py                     # Test runner
-├── mcp.server.py
-└── README.md
+├── pages/                  # Page Object classes
+│   ├── base_page.py        # Shared page methods and utilities
+│   └── login_page.py       # Login page interactions
+├── tests/                  # Test suites
+│   ├── conftest.py         # Fixtures, setup, and shared configuration
+│   ├── test_login.py       # UI login flow tests
+│   └── api_login_test.py   # API layer tests (health check, auth)
+├── utils/                  # Helper utilities and shared clients
+│   ├── api_client.py       # API request client
+│   └── helpers.py          # Shared test helpers
+├── mcp.server.py           # MCP server — Claude AI integration
+├── .github/workflows/      # GitHub Actions CI pipeline
+├── conftest.py             # Root-level fixtures
+├── pytest.ini              # pytest configuration
+├── requirements.txt        # Dependencies
+└── run.py                  # Local test runner script
 ```
 
 ---
 
-## Features
+## What This Covers
 
-### UI Testing
+**UI Automation**
+- Playwright-driven browser automation with full Page Object Model implementation
+- Fixture-based setup and teardown via pytest `conftest.py`
+- Reusable base page class with shared interaction methods
 
-* Playwright browser automation
-* Page Object Model (POM) design pattern
-* Reusable page components
-* Pytest fixtures for setup and teardown
-* Cross-browser execution support
+**API Testing**
+- Dedicated API client for structured request handling
+- Health check and authentication endpoint validation
+- Pytest markers for test categorisation (`@pytest.mark.smoke`, `@pytest.mark.regression`)
 
-### API Testing
+**AI-Augmented Workflows**
+- MCP server integration enabling Claude AI to interact with the live test framework
+- Supports AI-assisted authoring, triage, and coverage analysis
 
-* API client abstraction layer
-* Response validation
-* Authentication and login endpoint testing
-* Reusable API fixtures
-
-### CI/CD
-
-* Automated test execution through GitHub Actions
-* Runs on every push and pull request
-* Easy integration into development workflows
-
----
-
-## Sample Test Coverage
-
-### UI
-
-* Successful login validation
-* Invalid credentials validation
-* Empty login form validation
-
-### API
-
-* Login endpoint validation
-* Response status code verification
-* Response payload validation
+**CI/CD**
+- GitHub Actions pipeline triggers on every push and pull request to `main`
+- Test results visible under the Actions tab
 
 ---
 
 ## Running Locally
 
-### Install dependencies
+**Install dependencies**
 
 ```bash
 pip install -r requirements.txt
 playwright install chromium
 ```
 
-### Run all tests
+**Run all tests**
 
 ```bash
 pytest tests/ -v
 ```
 
-### Run UI tests
+**Run by marker**
+
+```bash
+pytest tests/ -m smoke -v
+pytest tests/ -m regression -v
+```
+
+**Run a specific file**
 
 ```bash
 pytest tests/test_login.py -v
-```
-
-### Run API tests
-
-```bash
 pytest tests/api_login_test.py -v
-```
-
-### Run tests in headed mode
-
-```bash
-pytest tests/ --headed
 ```
 
 ---
 
 ## CI Pipeline
 
-Tests run automatically on every push and pull request through GitHub Actions.
-
-Test results and workflow logs are available under the **Actions** tab of the repository.
-
----
-
-## Future Enhancements
-
-* Add HTML reporting (pytest-html)
-* Add Allure reporting
-* Expand API test coverage
-* Add test data management fixtures
-* Add parallel execution support
-* Add environment-based configuration
+Tests run automatically on every push and pull request to `main` via GitHub Actions. Results are available under the **Actions** tab in the repository.
 
 ---
 
 ## Author
 
-**Iryna Shelevii**
+**Iryna Shelevii** — Senior QA Automation Engineer | ISTQB CTFL & CT-AI Certified
 
-* GitHub: https://github.com/drajvmixx
-* LinkedIn: https://www.linkedin.com/in/irynasheleviiqa/
-
----
-
-## Notes
-
-The following directories are generated automatically and excluded from source control:
-
-```text
-__pycache__/
-.pytest_cache/
-.venv/
-venv/
-```
+[LinkedIn](https://linkedin.com/in/irynasheleviiqa) | [GitHub](https://github.com/drajvmixx)
