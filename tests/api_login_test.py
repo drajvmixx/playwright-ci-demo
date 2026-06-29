@@ -7,6 +7,7 @@ def test_api_health_check(api_client):
 
 @pytest.mark.regression
 def test_api_login(api_client):
+    # Demo credentials — replace with env var or fixture in production use
     payload = {"username": "testuser", "password": "testpass"}
     response = api_client.post("/api/login", json=payload)
     assert response.status_code == 200
